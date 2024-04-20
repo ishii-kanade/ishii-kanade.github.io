@@ -48,9 +48,7 @@
             }
             input[type="password"] {
                 margin-top: 10px;
-            }
-            button {
-                margin-left: 5px;
+                width: 80%; /* Adjust input width */
             }
         </style>
     </head>
@@ -90,9 +88,9 @@
                     <input
                         type="password"
                         id="passwordInput"
-                        placeholder="パスワードを入力"
+                        placeholder=""
+                        oninput="checkPassword()"
                     />
-                    <button onclick="checkPassword()">表示</button>
                 </div>
             </div>
         </div>
@@ -103,20 +101,15 @@
                 var element = document.getElementById("email");
                 element.innerHTML =
                     '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
-
-                function checkPassword() {
-                    var passwordInput =
-                        document.getElementById("passwordInput").value;
-                    if (passwordInput === "19981225") {
-                        window.location.href =
-                            "https://line.me/R/ti/p/XK-Z_Y4dxT";
-                    } else {
-                        alert("パスワードが違います。");
-                    }
-                }
-
-                window.checkPassword = checkPassword;
             });
+
+            function checkPassword() {
+                var password = document.getElementById("passwordInput").value;
+                if (password === "19981225") {
+                    // Correct password
+                    window.location.href = "https://line.me/R/ti/p/XK-Z_Y4dxT"; // Redirect to the specified URL
+                }
+            }
         </script>
     </body>
 </html>
