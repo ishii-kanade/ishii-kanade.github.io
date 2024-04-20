@@ -16,13 +16,8 @@
         />
         <style>
             body {
-                /* より鮮やかなグラデーション背景 */
-                background: linear-gradient(
-                    to right,
-                    #ff6e7f,
-                    #bfe9ff
-                ); /* ピンクからライトブルーへのグラデーション */
-                color: #333; /* テキストカラーを濃い色に */
+                background: linear-gradient(to right, #ff6e7f, #bfe9ff);
+                color: #333;
                 height: 100vh;
                 margin: 0;
                 display: flex;
@@ -30,21 +25,16 @@
                 align-items: center;
             }
             .card {
-                background: rgba(
-                    255,
-                    255,
-                    255,
-                    0.95
-                ); /* カードの背景を透明にして背景色が見えるように */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* カードに影をつける */
-                border-radius: 10px; /* 角を丸く */
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
             }
             .card-img-top {
-                border-radius: 50%; /* 画像を円形に */
+                border-radius: 50%;
                 width: 150px;
                 height: 150px;
                 object-fit: cover;
-                margin: 20px auto 10px; /* 画像を中央に配置 */
+                margin: 20px auto 10px;
             }
             .card-body {
                 text-align: center;
@@ -91,6 +81,24 @@
                     <p id="email">
                         <i class="fas fa-envelope"></i> Loading email...
                     </p>
+                    <!-- パスワード入力と表示ボタン -->
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        placeholder="パスワードを入力"
+                        style="margin-top: 10px"
+                    />
+                    <button onclick="checkPassword()" style="margin-left: 5px">
+                        表示
+                    </button>
+                    <!-- 追加情報エリア（非表示設定） -->
+                    <div id="additionalContact" style="display: none">
+                        <p>
+                            <a href="https://line.me/R/ti/p/XK-Z_Y4dxT"
+                                >LINE QRコード</a
+                            >
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,53 +109,21 @@
                 var element = document.getElementById("email");
                 element.innerHTML =
                     '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
-            });
-        </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Email already being set
-                var user = "ishii-kanade";
-                var domain = "laamile.com";
-                var element = document.getElementById("email");
-                element.innerHTML =
-                    '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
-
-                // Adding password input and button dynamically
-                var cardBody = document.querySelector(".card-body");
-                var input = document.createElement("input");
-                input.type = "password";
-                input.id = "passwordInput";
-                input.placeholder = "パスワードを入力";
-                input.style.marginTop = "10px";
-                var button = document.createElement("button");
-                button.innerText = "表示";
-                button.onclick = checkPassword;
-                button.style.marginLeft = "5px";
-
-                var additionalInfo = document.createElement("div");
-                additionalInfo.id = "additionalContact";
-                additionalInfo.style.display = "none";
-                additionalInfo.innerHTML = `
-                    <p><a href="https://line.me/R/ti/p/XK-Z_Y4dxT">LINE QRコード</a></p>
-                `;
-
-                cardBody.appendChild(input);
-                cardBody.appendChild(button);
-                cardBody.appendChild(additionalInfo);
-            });
-
-            function checkPassword() {
-                var passwordInput = document.getElementById("passwordInput");
-                var additionalContact =
-                    document.getElementById("additionalContact");
-                if (passwordInput.value === "19981225") {
-                    // ここに正しいパスワードを設定
-                    additionalContact.style.display = "block";
-                } else {
-                    alert("パスワードが違います。");
+                function checkPassword() {
+                    var passwordInput =
+                        document.getElementById("passwordInput");
+                    var additionalContact =
+                        document.getElementById("additionalContact");
+                    if (passwordInput.value === "19981225") {
+                        // 正しいパスワードをここに設定
+                        additionalContact.style.display = "block";
+                    } else {
+                        alert("パスワードが違います。");
+                    }
                 }
-            }
+                window.checkPassword = checkPassword; // グローバルスコープへの関数の露出
+            });
         </script>
     </body>
 </html>
