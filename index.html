@@ -103,5 +103,51 @@
                     '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
             });
         </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Email already being set
+                var user = "ishii-kanade";
+                var domain = "laamile.com";
+                var element = document.getElementById("email");
+                element.innerHTML =
+                    '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
+
+                // Adding password input and button dynamically
+                var cardBody = document.querySelector(".card-body");
+                var input = document.createElement("input");
+                input.type = "password";
+                input.id = "passwordInput";
+                input.placeholder = "パスワードを入力";
+                input.style.marginTop = "10px";
+                var button = document.createElement("button");
+                button.innerText = "表示";
+                button.onclick = checkPassword;
+                button.style.marginLeft = "5px";
+
+                var additionalInfo = document.createElement("div");
+                additionalInfo.id = "additionalContact";
+                additionalInfo.style.display = "none";
+                additionalInfo.innerHTML = `
+                    <p><a href="https://line.me/R/ti/p/XK-Z_Y4dxT">LINE QRコード</a></p>
+                `;
+
+                cardBody.appendChild(input);
+                cardBody.appendChild(button);
+                cardBody.appendChild(additionalInfo);
+            });
+
+            function checkPassword() {
+                var passwordInput = document.getElementById("passwordInput");
+                var additionalContact =
+                    document.getElementById("additionalContact");
+                if (passwordInput.value === "19981225") {
+                    // ここに正しいパスワードを設定
+                    additionalContact.style.display = "block";
+                } else {
+                    alert("パスワードが違います。");
+                }
+            }
+        </script>
     </body>
 </html>
