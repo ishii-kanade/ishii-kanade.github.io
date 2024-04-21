@@ -46,10 +46,6 @@
                 vertical-align: middle;
                 margin-right: 5px;
             }
-            input[type="password"] {
-                margin-top: 10px;
-                width: 80%; /* Adjust input width */
-            }
         </style>
     </head>
     <body>
@@ -88,7 +84,8 @@
                     <input
                         type="password"
                         id="passwordInput"
-                        placeholder=""
+                        class="form-control"
+                        placeholder="パスワードを入力"
                         oninput="checkPassword()"
                     />
                 </div>
@@ -106,8 +103,7 @@
             function checkPassword() {
                 var password = document.getElementById("passwordInput").value;
                 if (password === "19981225") {
-                    // Correct password
-                    window.location.href = "https://line.me/R/ti/p/XK-Z_Y4dxT"; // Redirect to the specified URL
+                    window.location.href = "https://line.me/R/ti/p/XK-Z_Y4dxT";
                 }
             }
         </script>
