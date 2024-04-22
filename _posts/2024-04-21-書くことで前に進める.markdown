@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title:  "書くことで前に進める"
 date:   2024-04-21 18:35:49 +0900
 categories: diary
