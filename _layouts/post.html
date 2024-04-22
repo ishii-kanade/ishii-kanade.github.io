@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<div class="container mt-4">
+    <h1>{{ page.title }}</h1>
+    {% if page.secret %}
+    <div id="passwordPrompt">
+        <div class="form-group">
+            <input
+                type="password"
+                class="form-control"
+                id="passwordInput"
+                placeholder="Enter Password"
+                oninput="checkPassword()"
+            />
+        </div>
+    </div>
+    <div id="secretContent" style="display: none">{{ content }}</div>
+    {% else %} {{ content }} {% endif %}
+</div>
+
+<script>
+    function checkPassword() {
+        var password = document.getElementById("passwordInput").value;
+        if (password === "19981225") {
+            document.getElementById("secretContent").style.display = "block";
+            document.getElementById("passwordPrompt").style.display = "none";
+        } else {
+            document.getElementById("secretContent").style.display = "none";
+        }
+    }
+</script>
