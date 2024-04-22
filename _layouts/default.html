@@ -10,8 +10,21 @@
             rel="stylesheet"
         />
     </head>
+
+    <style>
+        .main-gradient {
+            background: linear-gradient(
+                to bottom,
+                /* グラデーションの方向（上から下） */ rgba(135, 206, 235, 0.95),
+                /* スカイブルー、透明度95% */ rgba(255, 255, 255, 0.95)
+                    /* 白、透明度95% */
+            );
+        }
+    </style>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-light main-gradient"
+        >
             <div class="container">
                 <a class="navbar-brand" href="{{ site.baseurl }}/"
                     >{{ site.title }}</a
