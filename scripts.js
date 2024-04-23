@@ -16,18 +16,14 @@ document.getElementById('passwordForm').addEventListener('submit', function(even
         },
         body: JSON.stringify({password: password})
     }).then(function(response) {
-        if (response.ok) { // ステータスコードが200の場合
-            return response.json(); // JSONレスポンスをパース
+        if (response.ok) {
+            return response.json();
         } else {
             throw new Error('サーバーからエラーが返されました。');
         }
     }).then(function(data) {
-        // 応答の内容に応じた処理
-        if (data.redirect) {
-            window.location.href = data.url; // URLが指定されていればリダイレクト
-        } else {
-            alert(data.message); // メッセージを表示
-        }
+        // URLが返されたら、そこにリダイレクト
+        window.location.href = data.url;
     }).catch(function(error) {
         console.error('Error:', error);
         alert(error); // エラーをアラート表示
