@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="card">
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <input type="password" id="passwordInput" class="form-control" placeholder="Enter Password to view contact info" oninput="checkPassword()">
+        <div class="card" id="originalCard">
             <div class="d-flex align-items-center">
                 <img src="https://avatars.githubusercontent.com/u/112748642?s=400&u=ffb7443a9714c280cbeaf2abc9d0a35f51339129&v=4" class="card-img-top" alt="石井奏"/>
                 <!-- ブログへのリンクボタン -->
@@ -28,6 +29,7 @@
                 </a>
             </div>
             <div class="card-body">
+                
                 <h5 class="card-title">石井 奏(ishii-kanade)</h5>
                 <p class="card-text">EC、配車、動画配信アプリの開発等に従事。</p>
                 <div class="mb-3">
@@ -38,8 +40,12 @@
                     <i class="fa-brands fa-swift" style="color: orange"></i>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png" style="width: 24px; height: 24px; vertical-align: middle;"/>
                 </div>
-                <p id="email"><i class="fas fa-envelope"></i> Loading email...</p>
-                <input type="password" id="passwordInput" class="form-control" placeholder="Enter Password" oninput="checkPassword()"/>
+                <hr class="my-4"> <!-- 水平線 -->
+                <div id="contactInfo" style="filter: blur(10px); transition: filter 0.3s ease;">
+                    <p>Email: example@example.com</p>
+                    <p>Phone: 123-456-7890</p>
+                    <a href="https://line.me/R/ti/p/XK-Z_Y4dxT" target="_blank" class="btn btn-primary">Line Contact</a>
+                </div>
             </div>
         </div>
     </div>
