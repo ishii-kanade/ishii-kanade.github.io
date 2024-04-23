@@ -7,10 +7,12 @@ layout: default
         transform: scale(1.01);
         transition: transform 0.2s ease-in-out;
     }
+
     .blur-content {
         filter: blur(4px);
         pointer-events: none;
     }
+
     .card-title {
         pointer-events: auto;
     }
@@ -21,30 +23,12 @@ layout: default
     <div class="card mb-4 shadow-sm hover-shadow">
         <div class="card-body">
             <h5 class="card-title">
-                <a
-                    href="{{ post.url | prepend: site.baseurl }}"
-                    class="stretched-link"
-                    >{{ post.title }}</a
-                >
+                <a href="{{ post.url | prepend: site.baseurl }}" class="stretched-link">{{ post.title }}</a>
             </h5>
-            <!-- 秘密の場合はぼかしを適用 -->
-            {% if post.secret %}
-            <div class="blur-content">
-                <p class="card-text">Content is protected.</p>
-            </div>
-            <p class="card-text">
-                <small class="text-muted"
-                    >Posted on {{ post.date | date: "%B %d, %Y" }}</small
-                >
-            </p>
-            {% else %}
             <p class="card-text">{{ post.excerpt }}</p>
             <p class="card-text">
-                <small class="text-muted"
-                    >Posted on {{ post.date | date: "%B %d, %Y" }}</small
-                >
+                <small class="text-muted">Posted on {{ post.date | date: "%B %d, %Y" }}</small>
             </p>
-            {% endif %}
         </div>
     </div>
     {% endfor %}
