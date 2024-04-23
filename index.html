@@ -13,7 +13,6 @@
 </head>
 <body>
     <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-        <input type="password" id="passwordInput" class="form-control" placeholder="Enter Password" oninput="checkPassword()" style="width: 300px; margin-bottom: 80px;">
         <div class="card" id="originalCard">
             <div class="d-flex align-items-center">
                 <img src="https://avatars.githubusercontent.com/u/112748642?s=400&u=ffb7443a9714c280cbeaf2abc9d0a35f51339129&v=4" class="card-img-top" alt="石井奏"/>
@@ -42,6 +41,10 @@
                 </div>
                 <hr class="my-4"> <!-- 水平線 -->
                 <p id="email"><i class="fas fa-envelope"></i> Loading email...</p>
+                <form id="passwordForm" class="w-100">
+                    <input type="password" id="passwordInput" class="form-control" placeholder="Enter Password">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
