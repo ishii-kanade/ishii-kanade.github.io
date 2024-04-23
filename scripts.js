@@ -1,11 +1,3 @@
-// scripts.js
-document.addEventListener("DOMContentLoaded", function () {
-    var user = "ishii-kanade";
-    var domain = "laamile.com";
-    var element = document.getElementById("email");
-    element.innerHTML = '<i class="fas fa-envelope"></i> ' + user + "@" + domain;
-});
-
 document.getElementById('passwordInput').addEventListener('input', function() {
     var correctPassword = '19981225';
     var input = this.value;
