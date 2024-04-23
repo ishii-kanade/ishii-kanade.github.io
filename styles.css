@@ -30,3 +30,11 @@ body {
     vertical-align: middle;
     margin-right: 5px;
 }
+#contactInfo {
+    transition: filter 0.3s ease;
+}
+
+#passwordInput {
+    width: 300px; /* この幅はカードの幅に合わせて調整されています */
+    margin-bottom: 80px;
+}
