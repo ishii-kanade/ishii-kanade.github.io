@@ -33,3 +33,12 @@ body {
 #contactInfo {
     transition: filter 0.3s ease;
 }
+.main-gradient {
+    background: linear-gradient(to bottom,
+            /* グラデーションの方向（上から下） */
+            rgba(135, 206, 235, 0.95),
+            /* スカイブルー、透明度95% */
+            rgba(255, 255, 255, 0.95)
+            /* 白、透明度95% */
+        );
+}
