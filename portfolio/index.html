@@ -3,100 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container mt-5">
-        <section class="mb-5">
-            <h2>自己紹介</h2>
-            <p>フリーランスのモバイルアプリ開発者で、AndroidとiOSの両プラットフォームに対応したアプリケーション開発の経験が豊富です。多角的な視野で物事を捉え、ユーザー中心の設計とパフォーマンスの最適化を重視し、様々な業界で広範な経験を持ちます。</p>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <div class="container mx-auto p-8">
+        <!-- 自己紹介セクション -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">自己紹介</h2>
+            <p class="text-lg">フリーランスのモバイルアプリ開発者で、AndroidとiOSの両プラットフォームに対応したアプリケーション開発の経験が豊富です。多角的な視野で物事を捉え、ユーザー中心の設計とパフォーマンスの最適化を重視し、様々な業界で広範な経験を持ちます。</p>
         </section>
 
-        <section class="mb-5">
-            <h2>技術スキル</h2>
-            <ul class="list-group">
-                <li class="list-group-item">プログラミング言語: Java, Kotlin, Swift</li>
-                <li class="list-group-item">フレームワークとライブラリ: Android SDK, iOS UIKit, Firebase, Retrofit, Dagger</li>
-                <li class="list-group-item">ツールとプラットフォーム: Android Studio, Xcode, GitLab, Jenkins, CircleCI</li>
+        <!-- 技術スキルセクション -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">技術スキル</h2>
+            <ul class="list-disc pl-5 space-y-2">
+                <li>プログラミング言語: Java, Kotlin, Swift</li>
+                <li>フレームワークとライブラリ: Android SDK, iOS UIKit, Firebase, Retrofit, Dagger</li>
+                <li>ツールとプラットフォーム: Android Studio, Xcode, GitLab, Jenkins, CircleCI</li>
             </ul>
         </section>
 
-        <section class="mb-5">
-            <h2>プロジェクト経験</h2>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">医療関連アプリ開発 (iOS)</h3>
-                    <p class="card-text">期間: 2017年5月 - 2017年10月</p>
-                    <p class="card-text">技術: Swift, UIKit, CoreData, Alamofire</p>
-                    <p class="card-text">概要: 医療情報の安全な管理とアクセスを提供するiOSアプリの開発。バックエンドとの連携やユーザーインターフェースの設計を担当。</p>
-                </div>
+        <!-- プロジェクト経験セクション -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">プロジェクト経験</h2>
+
+            <!-- Card 1: 医療関連アプリ開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">医療関連アプリ開発 (iOS)</h3>
+                <p class="text-sm text-gray-600">期間: 2017年5月 - 2017年10月</p>
+                <p class="text-sm text-gray-600">技術: Swift, UIKit, CoreData, Alamofire</p>
+                <p class="mt-4">医療情報の安全な管理とアクセスを提供するiOSアプリの開発。バックエンドとの連携やユーザーインターフェースの設計を担当。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">ロードサービス関連アプリ開発 (Android/iOS)</h3>
-                    <p class="card-text">期間: 2019年5月 - 2019年12月</p>
-                    <p class="card-text">技術: Kotlin, Swift, Android SDK, Firebase</p>
-                    <p class="card-text">概要: ロードサービスを提供するアプリのクーポン機能とプッシュ通知機能の設計と実装。</p>
-                </div>
+            <!-- Card 2: ロードサービス関連アプリ開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">ロードサービス関連アプリ開発 (Android/iOS)</h3>
+                <p class="text-sm text-gray-600">期間: 2019年5月 - 2019年12月</p>
+                <p class="text-sm text-gray-600">技術: Kotlin, Swift, Android SDK, Firebase</p>
+                <p class="mt-4">ロードサービスを提供するアプリのクーポン機能とプッシュ通知機能の設計と実装。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">求人サービスアプリケーション開発 (Android)</h3>
-                    <p class="card-text">期間: 2020年1月 - 2020年4月</p>
-                    <p class="card-text">技術: Java, Android SDK, Firebase</p>
-                    <p class="card-text">概要: 求人サービスアプリのユーザーインターフェースとエクスペリエンスの全面的な改善。</p>
-                </div>
+            <!-- Card 3: 求人サービスアプリケーション開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">求人サービスアプリケーション開発 (Android)</h3>
+                <p class="text-sm text-gray-600">期間: 2020年1月 - 2020年4月</p>
+                <p class="text-sm text-gray-600">技術: Java, Android SDK, Firebase</p>
+                <p class="mt-4">求人サービスアプリのユーザーインターフェースとエクスペリエンスの全面的な改善。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">ヘルスケアアプリ開発 (Android/Android TV)</h3>
-                    <p class="card-text">期間: 2020年4月 - 2020年6月</p>
-                    <p class="card-text">技術: Kotlin, Android SDK, Firebase</p>
-                    <p class="card-text">概要: ヘルスケアコンテンツを提供するAndroid TVアプリの開発。コンテンツ管理システムの設計と実装を主導。</p>
-                </div>
+            <!-- Card 4: ヘルスケアアプリ開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">ヘルスケアアプリ開発 (Android/Android TV)</h3>
+                <p class="text-sm text-gray-600">期間: 2020年4月 - 2020年6月</p>
+                <p class="text-sm text-gray-600">技術: Kotlin, Android SDK, Firebase</p>
+                <p class="mt-4">ヘルスケアコンテンツを提供するAndroid TVアプリの開発。コンテンツ管理システムの設計と実装を主導。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">フィンテックアプリ開発 (Android)</h3>
-                    <p class="card-text">期間: 2020年6月 - 2020年12月</p>
-                    <p class="card-text">技術: Kotlin, Android SDK, Retrofit, Dagger</p>
-                    <p class="card-text">概要: 金融技術を活用した支払いシステムの開発。テーマ機能のカスタマイズとユーザービリティの向上に貢献。</p>
-                </div>
+            <!-- Card 5: フィンテックアプリ開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">フィンテックアプリ開発 (Android)</h3>
+                <p class="text-sm text-gray-600">期間: 2020年6月 - 2020年12月</p>
+                <p class="text-sm text-gray-600">技術: Kotlin, Android SDK, Retrofit, Dagger</p>
+                <p class="mt-4">金融技術を活用した支払いシステムの開発。テーマ機能のカスタマイズとユーザービリティの向上に貢献。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">ロケーションベースサービスアプリ開発 (Android)</h3>
-                    <p class="card-text">期間: 2021年10月 - 2022年1月</p>
-                    <p class="card-text">技術: Java, Android SDK, Retrofit, Firebase</p>
-                    <p class="card-text">概要: ビーコン技術を用いた位置情報サービスの開発。ユーザーの位置に基づいた情報提供機能の設計と実装。</p>
-                </div>
+            <!-- Card 6: ロケーションベースサービスアプリ開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">ロケーションベースサービスアプリ開発 (Android)</h3>
+                <p class="text-sm text-gray-600">期間: 2021年10月 - 2022年1月</p>
+                <p class="text-sm text-gray-600">技術: Java, Android SDK, Retrofit, Firebase</p>
+                <p class="mt-4">ビーコン技術を用いた位置情報サービスの開発。ユーザーの位置に基づいた情報提供機能の設計と実装。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">IoTデバイス管理アプリケーション開発</h3>
-                    <p class="card-text">期間: 2022年5月 - 2022年8月</p>
-                    <p class="card-text">技術: Kotlin, Android SDK, Jetpack Compose, Retrofit, Dagger/Hilt</p>
-                    <p class="card-text">概要: IoTデバイスと連携するためのモバイルアプリのインターフェース設計および実装。ユーザープロファイル管理機能の設計と実装を行いました。</p>
-                </div>
+            <!-- Card 7: IoTデバイス管理アプリケーション開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">IoTデバイス管理アプリケーション開発</h3>
+                <p class="text-sm text-gray-600">期間: 2022年5月 - 2022年8月</p>
+                <p class="text-sm text-gray-600">技術: Kotlin, Android SDK, Jetpack Compose, Retrofit, Dagger/Hilt</p>
+                <p class="mt-4">IoTデバイスと連携するためのモバイルアプリのインターフェース設計および実装。ユーザープロファイル管理機能の設計と実装を行いました。</p>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h3 class="card-title">メディアストリーミングアプリケーション開発 (AndroidTV/FireTV)</h3>
-                    <p class="card-text">期間: 2022年9月 - 現在</p>
-                    <p class="card-text">技術: Kotlin, Android SDK, Jetpack Compose, OkHttp, Retrofit</p>
-                    <p class="card-text">概要: メディアストリーミングサービス向けのアプリケーション開発。ユーザーインターフェースの改善、システム最適化、および新機能の実装。</p>
-                </div>
+            <!-- Card 8: メディアストリーミングアプリケーション開発 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h3 class="text-xl font-semibold text-blue-500 mb-2">メディアストリーミングアプリケーション開発 (AndroidTV/FireTV)</h3>
+                <p class="text-sm text-gray-600">期間: 2022年9月 - 現在</p>
+                <p class="text-sm text-gray-600">技術: Kotlin, Android SDK, Jetpack Compose, OkHttp, Retrofit</p>
+                <p class="mt-4">メディアストリーミングサービス向けのアプリケーション開発。ユーザーインターフェースの改善、システム最適化、および新機能の実装。</p>
             </div>
         </section>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <!-- フッター -->
+    <footer class="text-center py-4 bg-blue-600 text-white mt-12">
+        <p>&copy; 2024 あなたの名前</p>
+    </footer>
+
+    <!-- TailwindのCDNスクリプト -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
 </html>
