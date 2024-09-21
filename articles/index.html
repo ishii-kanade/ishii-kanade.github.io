@@ -32,40 +32,46 @@
         fetch('https://ishii-kanade-github-io-serverside.vercel.app/api/articles', {
             mode: 'cors' // CORSリクエストモード
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(response => response.text()) // XMLはテキスト形式で取得
+        .then(str => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(str, "application/xml");
+            const articles = xmlDoc.querySelectorAll('article');
             const articleList = document.getElementById('article-list');
-    
-            data.forEach(article => {
+
+            articles.forEach(article => {
+                const title = article.querySelector('title').textContent;
+                const description = article.querySelector('description').textContent;
+                const url = article.querySelector('url').textContent;
+
                 // カード作成
                 const card = document.createElement('div');
                 card.classList.add('bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow-lg', 'p-4');
-    
+
                 const cardTitle = document.createElement('h2');
                 cardTitle.classList.add('text-xl', 'font-bold', 'text-gray-800', 'mb-2');
-                cardTitle.textContent = article.title;
-    
+                cardTitle.textContent = title;
+
                 const cardDescription = document.createElement('p');
                 cardDescription.classList.add('text-gray-600', 'mb-4');
-                cardDescription.textContent = article.description;
-    
+                cardDescription.textContent = description;
+
                 const link = document.createElement('a');
                 link.classList.add('text-blue-500', 'hover:text-blue-700', 'font-semibold');
-                link.href = article.url;
+                link.href = url;
                 link.textContent = '記事を読む';
-    
+
                 // カードにタイトル、説明、リンクを追加
                 card.appendChild(cardTitle);
                 card.appendChild(cardDescription);
                 card.appendChild(link);
-    
+
                 // カードを記事リストに追加
                 articleList.appendChild(card);
             });
         })
         .catch(error => console.error('Error loading articles:', error));
     </script>
-    
 </body>
 
 </html>
