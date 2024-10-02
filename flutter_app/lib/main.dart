@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'portfolio_page.dart'; // 追加する
+import 'pages/overview_page.dart';
 
 
 void main() {
@@ -66,7 +66,7 @@ class MyHomePage extends StatelessWidget {
                     // PortfolioPage へのリンクを設定
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PortfolioPage()),
+                      MaterialPageRoute(builder: (context) => OverviewPage()),
                     );
                   },
                   child: Text('Go to Portfolio'),
