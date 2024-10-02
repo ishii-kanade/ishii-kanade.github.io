@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/overview_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'pages/video_list_page.dart';
 
 
 void main() {
@@ -72,6 +73,22 @@ class MyHomePage extends StatelessWidget {
                     );
                   },
                   child: Text('Go to Portfolio'),
+                ),
+
+                SizedBox(height: 8),
+
+                // 動画サンプルページへのリンクボタン
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => VideoListPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // ボタンの背景色を指定
+                  ),
+                  child: Text('Video Subscription Sample'),
                 ),
               ],
             ),
