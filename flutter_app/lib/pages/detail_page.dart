@@ -17,7 +17,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Portfolio Detail'),
         backgroundColor: Colors.blue[600],
       ),
       body: Padding(
