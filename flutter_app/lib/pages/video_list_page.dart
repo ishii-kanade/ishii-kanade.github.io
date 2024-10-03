@@ -6,16 +6,16 @@ class VideoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Subscriptions'),
-        backgroundColor: Colors.blue[600],
+        title: const Text('Video Subscriptions'),
+        backgroundColor: Colors.redAccent,
       ),
       body: GridView.builder(
-        padding: EdgeInsets.all(8),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // 2列表示に設定
+        padding: const EdgeInsets.all(8),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4, // 4列表示に設定
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
-          childAspectRatio: 16 / 9, // アスペクト比を16:9に設定
+          childAspectRatio: 16 / 9, // 横長の比率を設定
         ),
         itemCount: _videoList.length,
         itemBuilder: (context, index) {
@@ -41,40 +41,43 @@ class VideoListPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // サムネイル画像（16:9 の比率で表示）
-                  AspectRatio(
-                    aspectRatio: 16 / 9, // アスペクト比を16:9に設定
-                    child: ClipRRect(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(10)),
-                      child: Image.network(
-                        _videoList[index]['thumbnailUrl'] ?? '',
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
+                  // サムネイル画像（横幅いっぱい、上部に表示）
+                  ClipRRect(
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(10)),
+                    child: Image.network(
+                      _videoList[index]['thumbnailUrl'] ?? '',
+                      width: double.infinity,
+                      height: 120, // サムネイルの高さを少し小さく設定
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  // タイトルと詳細情報を `Expanded` でラップ
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        _videoList[index]['title'] ?? 'No Title',
+                        style: const TextStyle(
+                          fontSize: 12, // テキストのフォントサイズを少し小さめに設定
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),
-                  // タイトルと詳細情報
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      _videoList[index]['title'] ?? 'No Title',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        _videoList[index]['description'] ?? '',
+                        style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.grey[600]), // フォントサイズを調整
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      _videoList[index]['description'] ?? '',
-                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -86,7 +89,6 @@ class VideoListPage extends StatelessWidget {
     );
   }
 
-  // 動画リストのデータ
   final List<Map<String, String>> _videoList = [
     {
       'title': 'Beautiful Nature in 4K',
@@ -95,7 +97,7 @@ class VideoListPage extends StatelessWidget {
       'videoUrl':
           'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_5MB.mp4',
       'thumbnailUrl':
-          'https://images.pexels.com/photos/3584826/pexels-photo-3584826.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+          'https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
     },
     {
       'title': 'Time-lapse of City Traffic',
