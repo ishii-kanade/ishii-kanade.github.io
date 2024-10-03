@@ -2,11 +2,10 @@
 
 name: Flutter Web Build and Deploy
 
-# main ブランチに push されたときにトリガーされる
 on:
   push:
     branches:
-      - main  # またはデプロイしたいブランチ名を指定
+      - main  # デプロイしたいブランチを指定
 
 jobs:
   build:
@@ -18,30 +17,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Flutter のセットアップ
+      # Flutter のセットアップ（必要なバージョンを指定）
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.5.3'  # 必要な Flutter のバージョンを指定
-
-      # プロジェクトディレクトリに移動 (もし必要なら)
-      - name: Change Directory to Flutter Project
-        run: cd flutter_app
+          flutter-version: '3.10.5'  # Flutter のバージョンを指定
 
       # Flutter の依存関係を取得
       - name: Install dependencies
         run: flutter pub get
-        working-directory: flutter_app  # `flutter pub get` をプロジェクトルートで実行
+        working-directory: flutter_app  # 必要に応じてプロジェクトのディレクトリを指定
 
       # Flutter Web ビルドの実行
       - name: Build Flutter Web
         run: flutter build web
-        working-directory: flutter_app  # `flutter build web` をプロジェクトルートで実行
+        working-directory: flutter_app  # 必要に応じてプロジェクトのディレクトリを指定
 
       # ビルドされたファイルをルートにコピー
       - name: Copy Built Files to Root Directory
         run: cp -r flutter_app/build/web/* .
-      
+
       # `main` ブランチに変更をコミット & プッシュ
       - name: Commit and Push changes
         run: |
