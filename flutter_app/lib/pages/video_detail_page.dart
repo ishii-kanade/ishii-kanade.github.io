@@ -6,7 +6,11 @@ class VideoDetailPage extends StatelessWidget {
   final String description;
   final String videoUrl;
 
-  VideoDetailPage({required this.title, required this.description, required this.videoUrl});
+  const VideoDetailPage(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +32,12 @@ class VideoDetailPage extends StatelessWidget {
                 color: Colors.blue[600],
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               description,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Center(
               child: ElevatedButton.icon(
                 onPressed: () {
@@ -44,9 +48,10 @@ class VideoDetailPage extends StatelessWidget {
                     ),
                   );
                 },
-                icon: Icon(Icons.play_arrow),
-                label: Text('Watch Video'),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[600]),
+                icon: const Icon(Icons.play_arrow),
+                label: const Text('Watch Video'),
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: Colors.blue[600]),
               ),
             ),
           ],
