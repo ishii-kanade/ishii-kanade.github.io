@@ -22,7 +22,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.5'  # 必要な Flutter のバージョンを指定
+          flutter-version: '3.5.3'  # 必要な Flutter のバージョンを指定
 
       # プロジェクトディレクトリに移動 (もし必要なら)
       - name: Change Directory to Flutter Project
