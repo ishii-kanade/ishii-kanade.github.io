@@ -1,0 +1,42 @@
+# .github/workflows/flutter_web_build.yml
+
+name: Flutter Web Build and Deploy
+
+# main ブランチに push されたときにトリガーされる
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Flutter Web and Deploy to Main Branch
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリのクローンを作成
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Flutter のセットアップ
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.10.5'  # 必要な Flutter のバージョンを指定
+
+      # Flutter の依存関係を取得
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Flutter Web ビルドの実行
+      - name: Build Flutter Web
+        run: flutter build web
+
+      # `build/web` ディレクトリの内容を `main` ブランチにデプロイ
+      - name: Deploy Web to Main Branch
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f build/web
+          git commit -m "Deploy Web build to main branch"
+          git push origin main
