@@ -137,5 +137,5 @@ class VideoListPage extends StatelessWidget {
     },
   ];
 
-  const VideoListPage({super.key});
+  VideoListPage({super.key});
 }
