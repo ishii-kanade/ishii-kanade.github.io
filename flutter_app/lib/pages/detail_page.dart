@@ -6,7 +6,8 @@ class DetailPage extends StatelessWidget {
   final String duration;
   final String description;
 
-  DetailPage({
+  const DetailPage({
+    super.key,
     required this.title,
     required this.technology,
     required this.duration,
@@ -17,7 +18,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portfolio Detail'),
+        title: const Text('RESUME Detail'),
         backgroundColor: Colors.blue[600],
       ),
       body: Padding(
@@ -33,24 +34,24 @@ class DetailPage extends StatelessWidget {
                 color: Colors.blue[600],
               ),
             ),
-            SizedBox(height: 16.0),
-            Text(
+            const SizedBox(height: 16.0),
+            const Text(
               '使用技術:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(technology, style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16.0),
-            Text(
+            Text(technology, style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16.0),
+            const Text(
               '開発期間:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(duration, style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16.0),
-            Text(
+            Text(duration, style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 16.0),
+            const Text(
               '詳細情報:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(description, style: TextStyle(fontSize: 16)),
+            Text(description, style: const TextStyle(fontSize: 16)),
           ],
         ),
       ),

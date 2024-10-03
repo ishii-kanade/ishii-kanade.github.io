@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'detail_page.dart';
 
 class OverviewPage extends StatelessWidget {
+  const OverviewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portfolio Overview'),
+        title: const Text('RESUME Overview'),
         backgroundColor: Colors.blue[600],
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           // 各プロジェクトを表示（プロジェクト名と使用言語のみ）
           _buildProjectItem(
@@ -40,7 +42,8 @@ class OverviewPage extends StatelessWidget {
             title: 'ヘルスケアアプリ開発 (Android/Android TV)',
             technology: 'Kotlin, Android SDK',
             duration: '期間: 2020年4月 - 2020年6月',
-            description: 'ヘルスケアコンテンツを提供するAndroid TVアプリの開発。コンテンツ管理システムの設計と実装を主導。',
+            description:
+                'ヘルスケアコンテンツを提供するAndroid TVアプリの開発。コンテンツ管理システムの設計と実装を主導。',
           ),
           _buildProjectItem(
             context,
@@ -86,12 +89,13 @@ class OverviewPage extends StatelessWidget {
     required String description,
   }) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       elevation: 4.0,
       child: ListTile(
-        title: Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        title: Text(title,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         subtitle: Text(technology),
-        trailing: Icon(Icons.arrow_forward),
+        trailing: const Icon(Icons.arrow_forward),
         onTap: () {
           // タップすると詳細ページに遷移
           Navigator.push(

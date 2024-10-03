@@ -3,12 +3,13 @@ import 'pages/overview_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/video_list_page.dart';
 
-
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,15 +24,17 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About Me'),
+        title: const Text('About Me'),
       ),
       body: Center(
         child: Card(
-          margin: EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(16.0),
           elevation: 8.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -41,21 +44,21 @@ class MyHomePage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(
                     'https://avatars.githubusercontent.com/u/112748642?s=400&u=ffb7443a9714c280cbeaf2abc9d0a35f51339129&v=4',
                   ),
                 ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'Ishii Kanade',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Mobile App Developer',
                   style: TextStyle(
@@ -63,7 +66,7 @@ class MyHomePage extends StatelessWidget {
                     color: Colors.grey[700],
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     // PortfolioPage へのリンクを設定
@@ -72,10 +75,10 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => OverviewPage()),
                     );
                   },
-                  child: Text('Go to Portfolio'),
+                  child: const Text('RESUME'),
                 ),
 
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
 
                 // 動画サンプルページへのリンクボタン
                 ElevatedButton(
@@ -88,7 +91,7 @@ class MyHomePage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue, // ボタンの背景色を指定
                   ),
-                  child: Text('Video Subscription Sample'),
+                  child: const Text('Video Subscription Sample'),
                 ),
               ],
             ),

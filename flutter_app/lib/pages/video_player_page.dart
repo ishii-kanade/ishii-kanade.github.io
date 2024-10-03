@@ -5,7 +5,7 @@ import 'package:chewie/chewie.dart';
 class VideoPlayerPage extends StatefulWidget {
   final String videoUrl;
 
-  VideoPlayerPage({required this.videoUrl});
+  const VideoPlayerPage({super.key, required this.videoUrl});
 
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
@@ -45,15 +45,16 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Player'),
+        title: const Text('Video Player'),
         backgroundColor: Colors.blue[600],
       ),
       body: Center(
-        child: _chewieController != null && _chewieController!.videoPlayerController.value.isInitialized
+        child: _chewieController != null &&
+                _chewieController!.videoPlayerController.value.isInitialized
             ? Chewie(
                 controller: _chewieController!,
               )
-            : CircularProgressIndicator(),
+            : const CircularProgressIndicator(),
       ),
     );
   }
