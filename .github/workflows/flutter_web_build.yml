@@ -7,6 +7,9 @@ on:
     branches:
       - main  # デプロイしたいブランチを指定
 
+permissions:
+  contents: write  # `write` 権限を付与する
+
 jobs:
   build:
     name: Build Flutter Web and Deploy to Main Branch
@@ -16,6 +19,8 @@ jobs:
       # リポジトリのクローンを作成
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+            persist-credentials: true  # `checkout` で認証情報を保持する
 
       # Flutter のセットアップ（必要なバージョンを指定）
       - name: Setup Flutter
@@ -45,3 +50,5 @@ jobs:
           git add -A
           git commit -m "Deploy Web build to root directory"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 環境変数に GITHUB_TOKEN を設定
