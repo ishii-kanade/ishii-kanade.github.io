@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/calendar_app.dart';
+import 'package:flutter_app/pages/calendar/calendar_app.dart';
 import 'package:flutter_app/pages/timer_app.dart';
 
 class MiniAppListPage extends StatelessWidget {
