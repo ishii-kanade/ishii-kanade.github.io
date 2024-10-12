@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/mini_app_list_page.dart';
 import 'pages/overview_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/video_list_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.notoSansJpTextTheme(),
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -69,29 +70,26 @@ class MyHomePage extends StatelessWidget {
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
-                    // PortfolioPage へのリンクを設定
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OverviewPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const OverviewPage()),
                     );
                   },
                   child: const Text('RESUME'),
                 ),
 
                 const SizedBox(height: 8),
-
-                // 動画サンプルページへのリンクボタン
+                // ミニアプリ一覧ページへのリンク
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => VideoListPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const MiniAppListPage()),
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue, // ボタンの背景色を指定
-                  ),
-                  child: const Text('Video Subscription Sample'),
+                  child: const Text('Mini App List'),
                 ),
               ],
             ),
