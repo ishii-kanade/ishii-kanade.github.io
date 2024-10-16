@@ -1,0 +1,17 @@
+{
+    "name": "Flutter Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dart-code.flutter"
+            ]
+        }
+    },
+    "forwardPorts": [3000, 8080],
+    "postCreateCommand": "flutter doctor",
+    "remoteUser": "root"
+}
