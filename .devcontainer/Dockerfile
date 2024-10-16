@@ -1,30 +1,10 @@
-# Flutterの公式Dockerイメージをベースにする
-FROM cirrusci/flutter:latest
+# ベースイメージにDev ContainersのDebianベースイメージを使用
+FROM mcr.microsoft.com/devcontainers/base:debian
 
-# 必要なパッケージをインストール
-RUN apt-get update && apt-get install -y \
-    google-chrome-stable \
-    clang \
-    cmake \
-    ninja-build \
-    pkg-config \
-    curl \
-    unzip \
-    git \
-    lib32stdc++6 \
-    libglu1-mesa
+# Flutterのインストール
+RUN apt-get update && apt-get install -y curl git unzip wget lib32stdc++6 libglu1-mesa && \
+    git clone https://github.com/flutter/flutter.git /flutter && \
+    /flutter/bin/flutter doctor
 
-# Chromeの環境変数を設定
-ENV CHROME_EXECUTABLE=/usr/bin/google-chrome
-
-# Android SDKの設定（既にFlutterイメージに含まれているが確認）
-RUN flutter doctor --android-licenses
-
-# Flutterのアップグレードとチャンネルの設定
-RUN flutter channel stable && flutter upgrade
-
-# デフォルトの作業ディレクトリを設定
-WORKDIR /workspace
-
-# 必要なポートを公開
-EXPOSE 3000 8080
+# 環境変数の設定
+ENV PATH="/flutter/bin:/flutter/.pub-cache/bin:${PATH}"
