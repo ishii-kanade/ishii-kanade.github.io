@@ -1,0 +1,49 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_app (web)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "chrome"
+            ],
+            "cwd": "flutter_app",
+            "env": {
+                "CHROME_EXECUTABLE": "/usr/bin/google-chrome --no-sandbox"
+            }
+        },
+        {
+            "name": "flutter_app (web profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--profile"
+            ],
+            "cwd": "flutter_app",
+            "env": {
+                "CHROME_EXECUTABLE": "/usr/bin/google-chrome --no-sandbox"
+            }
+        },
+        {
+            "name": "flutter_app (web release mode)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--release"
+            ],
+            "cwd": "flutter_app",
+            "env": {
+                "CHROME_EXECUTABLE": "/usr/bin/google-chrome --no-sandbox"
+            }
+        }
+    ]
+}
