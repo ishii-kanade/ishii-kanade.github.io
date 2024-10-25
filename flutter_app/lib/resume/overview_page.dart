@@ -14,6 +14,35 @@ class OverviewPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
+          // 自己紹介セクション
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            margin: const EdgeInsets.only(bottom: 20.0),
+            decoration: BoxDecoration(
+              color: Colors.blue[50],
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '自己紹介',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[900],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  '主にAndroid/iOSアプリの多様なプロジェクトに取り組んできました。\n'
+                  'プログラミングだけでなく、仕様決定や設計からリリース後の改善まで幅広い工程に携わっており、'
+                  'ユーザーのニーズに応えるアプリ開発を心掛けています。',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
           // 各プロジェクトを表示（プロジェクト名と使用言語のみ）
           _buildProjectItem(
             context,

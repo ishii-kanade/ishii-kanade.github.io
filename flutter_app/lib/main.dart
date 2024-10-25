@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/mini_app_list_page.dart';
-import 'pages/overview_page.dart';
+import 'resume/overview_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
