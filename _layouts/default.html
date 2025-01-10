@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ page.title | escape }}</title>
+        <link
+            rel="stylesheet"
+            href="{{ '/assets/css/styles.css' | relative_url }}"
+        />
+    </head>
+    <body class="bg-gray-100 text-gray-900">
+        <header class="bg-blue-600 text-white p-4 shadow">
+            <div class="container mx-auto">
+                <h1 class="text-2xl font-bold">{{ site.title }}</h1>
+            </div>
+        </header>
+        <main class="container mx-auto py-8">{{ content }}</main>
+        <footer class="bg-gray-800 text-white text-center p-4">
+            © {{ site.title }} {{ "now" | date: "%Y" }}
+        </footer>
+    </body>
+</html>
