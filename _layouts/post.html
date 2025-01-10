@@ -2,13 +2,10 @@
 layout: default
 ---
 
-<article class="bg-white rounded shadow p-6">
-    <header class="mb-4">
-        <h1 class="text-3xl font-bold text-blue-600">{{ page.title }}</h1>
+<article class="bg-white rounded shadow p-8 md:p-12 mx-auto my-8 max-w-4xl">
+    <header class="mb-6">
+        <h1 class="text-4xl font-bold text-blue-600">{{ page.title }}</h1>
         <p class="text-sm text-gray-500">{{ page.date | date: "%B %d, %Y" }}</p>
     </header>
-    <div class="prose max-w-none">{{ content }}</div>
+    <div class="prose max-w-none prose-lg">{{ content }}</div>
 </article>
-<a href="/blog" class="text-blue-500 hover:underline mt-8 inline-block"
-    >← 投稿一覧に戻る</a
->
