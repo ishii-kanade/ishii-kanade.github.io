@@ -1,86 +1,84 @@
 ---
-
 layout: post
-title: "Clean Architecture × Flutter: An Example Implementation of a Maintainable and Simple Memo App"
+title: "クリーンアーキテクチャ×Flutter：保守性に優れたシンプルメモアプリの実装例"
 date: 2025-01-15
 categories: blog
+---
+
+クリーンアーキテクチャは、システムの各部品の役割（責務）を明確に分割することで、コードの保守性、テスト容易性、拡張性を向上させる設計手法です。この記事では、難しい用語はなるべく使わず、できるだけ簡単な言葉で解説していきます。もし詳しく知りたい方は、ぜひ「SOLID原則」で調べてみてください。
+
+この記事では、以下のリポジトリを例に、Flutter を用いたクリーンアーキテクチャの実装例を紹介し、各層の具体的な役割と、その設計思想がもたらすメリットについて解説します。
+
+[リポジトリ](https://github.com/ishii-kanade/memoapp)
 
 ---
 
-Clean Architecture is a design approach that improves code maintainability, testability, and extensibility by clearly dividing the roles (responsibilities) of each component in the system. In this article, we will explain the concept using simple language and avoiding overly technical terms. If you are interested in learning more, please search for the "SOLID principles."
+## 1. クリーンアーキテクチャの基本構造
 
-In this article, we introduce an example implementation of Clean Architecture using Flutter. We explain the specific roles of each layer and the benefits of this design philosophy, using the following repository as our example:
+クリーンアーキテクチャでは、一般的に以下の 3 つのレイヤーに分割して設計します。
 
-[Repository](https://github.com/ishii-kanade/memoapp)
+- **Domain層（ドメイン層）**
+  アプリケーションの本質的なビジネスロジックを表現します。ここでは、各エンティティ（概念）の定義やユースケース（業務ルール）を実装し、外部の技術的な実装から独立させます。
 
----
+- **Data層**
+  データの入出力や永続化の実装を担います。ファイル操作、データベース接続、API 通信など、外部環境との連携部分がここに含まれ、Domain層で定義された抽象（リポジトリなど）に対して具体的な実装を提供します。
 
-## 1. Basic Structure of Clean Architecture
+- **Presentation層（UI層）**
+  ユーザーとのインタラクションを担当する部分です。Flutter のウィジェット、状態管理（ChangeNotifier、Bloc、Provider など）を用いて、ユーザー入力を処理し、Domain層のユースケースを呼び出すことで、最新の状態を画面に反映させます。
 
-Clean Architecture generally divides the system into the following three layers:
+これらのレイヤーは、原則として内側（Domain層）が最も安定しており、外側（Data層、Presentation層）は変化に柔軟に対応できる設計となっています。Domain層は「何をするか」を定義し、外側は「どうやって実現するか」にフォーカスすることで、システム全体の変更を局所化できます。
 
-- **Domain Layer**
-  This layer represents the core business logic of the application. It includes the definitions of various entities (concepts) and the implementation of use cases (business rules) while staying independent from technical details.
+### イメージ図
 
-- **Data Layer**
-  This layer handles the implementation of data input/output and persistence. It is responsible for file operations, database connections, API communications, etc. It also provides concrete implementations for the abstractions (such as repositories) defined in the Domain layer.
-
-- **Presentation Layer (UI Layer)**
-  This layer is responsible for user interactions. It handles user input using Flutter widgets and state management (such as ChangeNotifier, Bloc, Provider, etc.) and calls use cases from the Domain layer to reflect the latest state on the screen.
-
-In this design, the inner layer (Domain layer) is the most stable, while the outer layers (Data and Presentation layers) can adapt more flexibly to changes. The Domain layer defines "what" to do, and the outer layers focus on "how" to do it, thereby localizing changes in the overall system.
-
-### Diagram
-
-Below is a Mermaid diagram showing the relationship between the layers:
+以下は、各レイヤーの関係性を表す Mermaid の図です。
 
 <div class="mermaid">
     graph TD
-        A[Presentation Layer<br/>UI, Notifier, MemoPage]
-        B[Domain Layer<br/>MemoEntity, UseCases, Repository Abstraction]
-        C[Data Layer<br/>MemoModel, DataSource, Repository Concrete Implementation]
+        A[Presentation 層<br/>UI, Notifier, MemoPage]
+        B[Domain 層<br/>MemoEntity, UseCases, リポジトリの抽象]
+        C[Data 層<br/>MemoModel, DataSource, Repository の具象実装]
 
-        A -->|Calls UseCases| B
-        B -->|Abstract Repository| C
+        A -->|UseCase 呼び出し| B
+        B -->|抽象化されたリポジトリ| C
 </div>
 
 ---
 
-### An Analogy: Clean Architecture as Movie Production
+### クリーンアーキテクチャを映画制作に例える
 
-To make it easier to understand, imagine Clean Architecture in the context of movie production, where each layer’s role is clearly defined, thereby enhancing overall quality and maintainability. Consider the following analogy:
+クリーンアーキテクチャを映画制作に例えると、各層の役割が明確に分割され、全体の品質や保守性が向上している様子がイメージしやすくなります。以下のように考えてみてください。
 
-- **Domain Layer (Screenwriter and Director)**
-  - **Role:** The screenwriter and director decide the core story, theme, and characters of the movie. They focus on "what" the movie will convey without worrying about the sets or special effects.
-  - **Correspondence:** The Domain layer defines the business logic and rules of the app (for example, creating, editing, and deleting memos). It specifies "what" to do, independent of "how" it is implemented later.
+- **Domain層（シナリオライターと監督）**
+  - **役割:** 映画の核となるストーリーやテーマ、キャラクターの本質などを決めるのはシナリオライターや監督です。彼らは映画の「何を伝えるか」というビジョンに集中し、どのようなセットや特殊効果を使うかなどは意識しません。
+  - **対応例:** Domain層は、アプリの本質的なビジネスロジックやルール（例えば、メモの作成、編集、削除など）を定義します。ここでは「何をするか」が決まっており、そのルールは後でどのように実現されるかには依存しません。
 
-- **Data Layer (Art and Special Effects Team)**
-  - **Role:** The art and special effects teams are responsible for creating the sets and special effects that bring the director’s vision to life. They focus on the practical aspects of how to realize the story.
-  - **Correspondence:** The Data layer implements the concrete data operations (such as file I/O, JSON conversion, database access, or API communication) based on the instructions coming from the Domain layer. It also handles interactions with external systems.
+- **Data層（美術や特殊効果チーム）**
+  - **役割:** 映画で使われるセットや特殊効果、実際の撮影技術を担当するのが美術や特殊効果のチームです。彼らはシナリオライターや監督のビジョンに沿って、具体的な映像を作り上げます。
+  - **対応例:** Data層は、Domain層の指示（つまり、どのようなデータ操作が必要か）に基づいて、実際のデータの読み書きや変換、API 通信などの具体的な技術的実装を行います。ここでは外部システムとの連携も担います。
 
-- **Presentation Layer (Actors and Stage Crew)**
-  - **Role:** Actors and the stage crew directly communicate the story to the audience. They perform based on the script, ensuring that the audience can follow the narrative.
-  - **Correspondence:** The Presentation layer handles direct interactions with the user. It uses Flutter widgets and state management to capture user input and call the Domain layer’s use cases, updating the screen to reflect the latest state.
+- **Presentation層（俳優と演出スタッフ）**
+  - **役割:** 俳優や演出スタッフは、観客に物語を伝える最前線の存在です。シナリオに基づいて演技をし、観客がストーリーを理解しやすいように演出を行います。
+  - **対応例:** Presentation層は、ユーザーと直接対話する部分です。Flutter のウィジェットや状態管理を用いて、ユーザー入力を受け、Domain層のユースケースを呼び出すことでデータを画面に反映します。
 
 ---
 
-## 2. Examples of Each Layer in the Memo App
+## 2. メモアプリの各レイヤーの具体例
 
-Below, we explain the specific roles and implementation examples for each layer.
+ここでは、各層ごとの具体的な役割と実装例を詳しく説明します。
 
-### 2.1 Domain Layer
+### 2.1 Domain層
 
-#### Role
+#### 役割
 
-- This layer defines the business rules of the application—that is, what the app is supposed to do. It delegates the "how" part to other layers, making overall system management easier.
-- It captures the fundamental operations of a memo app, such as creating, editing, and pinning memos.
-- By remaining independent of technical implementations (UI, data persistence, etc.), it provides a design that is resilient to future changes.
+- アプリケーションのビジネスルール、つまり「何をするか」を定義する層です。「どうやるか」は他の層に任せるため、システム全体が管理しやすくなります。
+- この層は、ユーザーがメモアプリで行う「メモの記録」「編集」「ピン留め」などの基本操作のルールを表現します。
+- 技術的な実装（UI やデータ保存方法）から独立しているため、将来的な変更に強い設計です。
 
-#### Implementation Examples
+#### 実装例
 
 - **MemoEntity**
 
-  In the Domain layer, `MemoEntity` represents the concept of a memo. It is defined as the basic model used throughout the application’s business logic.
+  Domain層で「メモ」という概念を表現するクラスです。アプリ全体のビジネスロジックで利用する基本モデルとして定義されます。
 
   ```dart
   // domain/entities/memo_entity.dart
@@ -95,9 +93,9 @@ Below, we explain the specific roles and implementation examples for each layer.
   }
   ```
 
-- **Use Cases (GetMemos, SaveMemos)**
+- **ユースケース（GetMemos, SaveMemos）**
 
-  Each use case encapsulates a specific business process. For example, the use case for retrieving a list of memos (`GetMemos`) is implemented as follows:
+  各ユースケースは、業務処理をカプセル化したクラスです。例えば、「メモ一覧の取得」を担当する `GetMemos` の実装例は以下の通りです。
 
   ```dart
   // domain/usecases/get_memos.dart
@@ -115,11 +113,11 @@ Below, we explain the specific roles and implementation examples for each layer.
   }
   ```
 
-  Similarly, `SaveMemos` would use `MemoRepository` to implement memo saving.
+  ※SaveMemosも同様に、`MemoRepository` を利用して実装します。
 
-- **Dependency Inversion (Abstraction)**
+- **依存関係の逆転（Dependency Inversion）の抽象**
 
-  In the Domain layer, we define the repository interface as an abstraction for data retrieval and storage. This way, the business logic depends only on the abstraction rather than the concrete implementation.
+  Domain層では、データ取得・保存のための抽象としてリポジトリのインターフェースを定義します。これにより、ビジネスロジックは具体的なデータソースの実装に依存せず、抽象に対してのみ依存します。
 
   ```dart
   // domain/repositories/memo_repository.dart
@@ -131,20 +129,20 @@ Below, we explain the specific roles and implementation examples for each layer.
   }
   ```
 
-  This design ensures that the use cases work solely based on the contract defined by the interface, independent of the Data layer's concrete implementations.
+  このように定義することで、ユースケースはリポジトリの具象実装（後述する Data層側の実装）に依存せず、インターフェースが提供する契約内容だけで動作するようになります。
 
-### 2.2 Data Layer
+### 2.2 Data層
 
-#### Role
+#### 役割
 
-- The Data layer provides concrete implementations of data operations (such as file I/O, JSON conversion, and API communication) according to the abstractions defined in the Domain layer.
-- By consolidating the implementation in the Data layer, the Domain layer remains unaffected by changes to technical details.
+- Domain層の抽象に対して、具体的なデータ操作（ファイル読み書き、JSON変換、データベース接続、API 通信など）を実装します。
+- Data層に実装を集約することで、Domain層は技術的な変更に左右されず、ビジネスロジックのみに集中できます。
 
-#### Key Implementation Examples
+#### 主な実装例
 
 - **MemoLocalDataSourceImpl**
 
-  This is an example of an implementation that reads and writes JSON files from local storage.
+  ローカルストレージでファイルから JSON を読み書きする実装例です。
 
   ```dart
   // data/datasources/memo_local_data_source_impl.dart
@@ -173,7 +171,7 @@ Below, we explain the specific roles and implementation examples for each layer.
           return jsonList.cast<Map<String, dynamic>>();
         }
       } catch (e) {
-        // Implement appropriate error handling
+        // 適切なエラーハンドリングを実装
       }
       return [];
     }
@@ -193,7 +191,7 @@ Below, we explain the specific roles and implementation examples for each layer.
 
 - **MemoModel**
 
-  In the Data layer, the DTO (Data Transfer Object) called `MemoModel` is responsible for converting between JSON and the Domain layer’s `MemoEntity`. It extends `MemoEntity` and simplifies the conversion process with external data.
+  Data層における DTO（Data Transfer Object）として JSON との変換を担当します。Domain層の `MemoEntity` を継承し、外部データとの相互変換を簡単に行います。
 
   ```dart
   // data/models/memo_model.dart
@@ -223,7 +221,7 @@ Below, we explain the specific roles and implementation examples for each layer.
 
 - **MemoRepositoryImpl**
 
-  This concrete implementation of the `MemoRepository` interface (defined in the Domain layer) retrieves data from the Data layer’s data sources, converts it into Domain entities, and vice versa for saving data.
+  Domain層で定義した `MemoRepository` インターフェースの具体的実装です。Data層のデータソースからデータを取得し、Domain層のエンティティに変換して返します。また、データ保存も同様に行います。
 
   ```dart
   // data/repositories/memo_repository_impl.dart
@@ -255,13 +253,15 @@ Below, we explain the specific roles and implementation examples for each layer.
   }
   ```
 
-### 2.3 A Concrete Example of Dependency Inversion
+### 2.3 依存関係の逆転の具体例
 
-Since the Domain layer depends only on the abstraction (i.e., the repository interface) and not on the concrete implementations in the Data layer, it is possible to change the data source (for example, from a local file to a cloud service) without modifying the Domain layer or the use cases. Here’s how the dependency inversion works:
+Domain層はリポジトリの抽象（インターフェース）に依存するため、Data層の具象実装に直接依存しません。これにより、たとえばデータの保存先をローカルファイルからクラウドサービスに変更する場合でも、Domain層やユースケースの変更を最小限に抑えることができます。
 
-1. **Abstraction in the Domain Layer**
+以下は、依存関係の逆転がどのように動作しているかの例です。
 
-   As shown earlier, the Domain layer defines `MemoRepository` as follows:
+1. **Domain層の抽象**
+
+   すでに示した通り、Domain層では以下のように `MemoRepository` を定義しています。
 
    ```dart
    // domain/repositories/memo_repository.dart
@@ -273,9 +273,9 @@ Since the Domain layer depends only on the abstraction (i.e., the repository int
    }
    ```
 
-2. **Use Case Dependency**
+2. **ユースケースの依存関係**
 
-   The use cases rely on this abstraction, so they can operate without knowing the concrete implementation.
+   ユースケースはこの抽象に依存しているため、具体的な実装を知らなくても利用できます。
 
    ```dart
    // domain/usecases/get_memos.dart
@@ -293,9 +293,9 @@ Since the Domain layer depends only on the abstraction (i.e., the repository int
    }
    ```
 
-3. **Concrete Implementation in the Data Layer**
+3. **Data層の具象実装**
 
-   The Data layer implements the interface using `MemoRepositoryImpl`, which handles the actual data operations. Because the use cases interact with the interface, replacing the implementation is seamless.
+   Data層では、`MemoRepositoryImpl` が `MemoRepository` を実装しており、実際のデータ操作を担当します。ユースケースからはインターフェースとして扱われるため、差し替えが容易です。
 
    ```dart
    // data/repositories/memo_repository_impl.dart
@@ -327,9 +327,9 @@ Since the Domain layer depends only on the abstraction (i.e., the repository int
    }
    ```
 
-4. **Dependency Injection in the Presentation Layer**
+4. **Presentation層での依存性注入**
 
-   In the Presentation layer, the use cases are accessed through dependency injection. For example, the following `MemoNotifier` makes use of the use cases:
+   Presentation層は、ユースケースを通して Domain層にアクセスします。たとえば、以下のように `MemoNotifier` でユースケースを利用します。
 
    ```dart
    // presentation/notifiers/memo_notifier.dart
@@ -360,24 +360,24 @@ Since the Domain layer depends only on the abstraction (i.e., the repository int
        notifyListeners();
      }
 
-     // Additional methods like updateMemo, deleteMemo, togglePin can be added
+     // updateMemo, deleteMemo, togglePin などの追加処理
    }
    ```
 
-With this approach, the Domain layer depends only on the repository abstraction, so even if the concrete implementation in the Data layer changes, the business logic and UI (Presentation layer) remain unaffected. This also allows for easily swapping in a mock repository during testing.
+このように、Domain層が抽象（インターフェース）のみを知ることで、Data層の具体的な実装が後から変更されても、ユースケースや UI に影響を及ぼさずにシステムの保守性が向上します。また、テスト時にモックのリポジトリを差し替えるなど、柔軟な設計が実現できます。
 
-### 2.4 Presentation Layer
+### 2.4 Presentation層
 
-#### Role
+#### 役割
 
-- The Presentation layer handles user interactions. It uses Flutter widgets and state management (Notifier, Bloc, Provider, etc.) to capture user input and call the Domain layer’s use cases.
-- Since the business logic is encapsulated in the Domain layer, changes to the UI are localized, making maintenance easier.
+- ユーザーとのインタラクションを処理する層です。Flutter のウィジェットや状態管理（Notifier、Bloc、Provider など）を用いて、ユーザー入力を受け付け、Domain層のユースケースを呼び出します。
+- UI の変更があっても、ビジネスロジック自体は Domain層に集約されているため、改修の範囲が局所化されます。
 
-#### Key Implementation Examples
+#### 主な実装例
 
 - **MemoNotifier**
 
-  This class manages the state in response to user actions. For example, when a user adds a new memo, it calls the Domain layer’s use case to update the state.
+  ユーザー操作に応じた状態管理を行うクラスです。例えば、ユーザーが新しいメモを追加したとき、Domain層のユースケースを呼び出して状態を更新します。
 
   ```dart
   // presentation/notifiers/memo_notifier.dart
@@ -408,36 +408,37 @@ With this approach, the Domain layer depends only on the repository abstraction,
       notifyListeners();
     }
 
-    // Additional methods like updateMemo, deleteMemo, togglePin can be added
+    // updateMemo, deleteMemo, togglePin などのメソッドも追加可能
   }
   ```
 
-- **Flutter Widget (MemoPage)**
+- **Flutter Widget（MemoPage）**
 
-  This widget is responsible for building the actual UI. It combines text input, buttons, and lists to display the memos based on the state provided by the `MemoNotifier`. For detailed code examples, please refer to [memo_page.dart](https://github.com/ishii-kanade/memoapp/blob/main/lib/presentation/pages/memo_page.dart).
-
----
-
-## 3. Summary
-
-Using the example of the memo app, we have covered the following key points:
-
-- **Domain Layer**
-  - Defines the essential concepts (such as `MemoEntity`) and business logic (use cases like `GetMemos` and `SaveMemos`), keeping it independent from technical implementations.
-  - Due to dependency inversion (relying only on the repository abstraction), changes in the Data layer do not affect the business logic.
-
-- **Data Layer**
-  - Handles concrete implementations like JSON conversion and file I/O, providing implementations for the abstractions defined in the Domain layer.
-  - Even if the implementation changes, the impact on the Domain and Presentation layers remains minimal.
-
-- **Presentation Layer**
-  - Responsible for building the UI and managing state. It triggers Domain layer use cases based on user input to always reflect the latest state on the screen.
-  - Dependency injection of use cases makes testing and implementation swapping easier.
-
-- **Dependency Inversion**
-  - The Domain layer depends only on abstractions (repository interfaces), not on the concrete implementations of the Data or Presentation layers.
-  - This allows for easy substitution of implementations (e.g., swapping in a mock repository for testing or replacing a local storage with a cloud service), enhancing the overall maintainability and extensibility of the system.
+  実際の画面表示を担当するウィジェットです。テキスト入力、ボタン、リスト表示などを組み合わせ、`MemoNotifier` から最新状態を受け取りユーザーの操作をトリガーします。
+  詳細なコード例は [memo_page.dart](https://github.com/ishii-kanade/memoapp/blob/main/lib/presentation/pages/memo_page.dart) を参照してください。
 
 ---
 
-By adopting Clean Architecture, your application is divided into well-defined layers that can adapt flexibly to future changes. In particular, the dependency inversion pattern enables the Domain layer to focus solely on business logic while allowing the Data and Presentation layers to be easily exchanged. We hope that this article serves as a helpful example for both practical implementation and learning about maintainable app design.
+## 3. まとめ
+
+今回のメモアプリの例を通じて、以下のポイントを確認しました。
+
+- **Domain層**
+  - アプリの本質的な概念（MemoEntity）やビジネスロジック（ユースケース：GetMemos, SaveMemos）を定義し、技術的な実装から独立。
+  - 依存関係の逆転により、抽象（リポジトリインターフェース）のみを利用するため、Data層の変更がビジネスロジックに影響を与えない。
+
+- **Data層**
+  - JSON変換、ファイル入出力など具体的な実装を担当し、Domain層で定義した抽象に対する実装を提供。
+  - 実装が変更されても、Domain層および Presentation層への影響を最小限に抑える設計となっている。
+
+- **Presentation層**
+  - UI の構築と状態管理を担当。ユーザーの入力を Domain層のユースケースに橋渡しし、常に最新の状態を画面に反映する。
+  - ユースケースを通じた依存注入により、テストや実装差し替えが容易になっている。
+
+- **依存関係の逆転**
+  - Domain層は、外部の具体的な実装（Data層や Presentation層）に依存せず、あくまで抽象（リポジトリインターフェース）にのみ依存する設計を採用。
+  - この結果、テスト時にモックの実装を差し替えたり、機能拡張やデータソースの変更が容易になり、システム全体の保守性、拡張性が向上します。
+
+---
+
+クリーンアーキテクチャを採用することで、アプリケーションが各層に明確に分割され、将来的な変更にも柔軟に対応できる設計となります。特に依存関係の逆転の仕組みを利用することで、Domain層はビジネスロジックに専念でき、Data層や Presentation層の具体的な実装を簡単に入れ替えることが可能です。この記事が、シンプルなメモアプリの実装例として、実務や学習の参考になれば幸いです。
