@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,21 +35,23 @@
     </head>
     <body class="bg-light text-dark">
         <!-- Header -->
-        <header class="bg-primary text-white shadow p-3 mb-4">
-            <div class="container d-flex align-items-center">
-                <a
-                    href="{{ '/' | relative_url }}"
-                    class="d-flex align-items-center text-white text-decoration-none"
-                >
-                    <i class="fas fa-pen fa-2x me-2"></i>
-                    <!-- ロゴアイコン -->
-                    <h1 class="h3 mb-0">{{ site.title }}</h1>
-                </a>
-            </div>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+                <div class="container">
+                    <!-- ロゴ・サイトタイトル -->
+                    <a
+                        class="navbar-brand d-flex align-items-center"
+                        href="{{ '/' | relative_url }}"
+                    >
+                        <i class="fas fa-pen fa-2x me-2"></i>
+                        <span class="h5 mb-0">{{ site.title }}</span>
+                    </a>
+                </div>
+            </nav>
         </header>
 
         <!-- Main Content -->
-        <main class="container py-3">{{ content }}</main>
+        <main class="container py-5">{{ content }}</main>
 
         <!-- Footer -->
         <footer class="bg-dark text-white text-center p-3 mt-4">
